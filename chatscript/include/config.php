@@ -22,7 +22,7 @@ if ($config->developer_mode) {
 }
 
 $config->database = [
-    'type' => 'mysql',
+    'type' => 'pgsql',
     'host' => 'localhost',
     'database' => 'grupo',
     'username' => 'root',
