@@ -25,18 +25,16 @@ RUN apt-get update && apt-get install -y \
 RUN a2enmod rewrite
 
 # Ensure necessary directories exist and set permissions
-RUN mkdir -p /var/www/html/storage && \
-    mkdir -p /var/www/html/bootstrap/cache && \
+RUN mkdir -p /var/www/html/storage /var/www/html/bootstrap/cache && \
     chown -R www-data:www-data /var/www/html && \
-    chmod -R 755 /var/www/html && \
     chmod -R 775 /var/www/html/storage /var/www/html/bootstrap/cache
 
 # Copy application files to the Apache web root
 COPY ./chatscript /var/www/html/
 
-# Set environment variables for file handling and buffering
-ENV allow_url_fopen=1
-ENV output_buffering=4096
+# Reset permissions after copying files to ensure correct ownership
+RUN chown -R www-data:www-data /var/www/html && \
+    chmod -R 775 /var/www/html/storage /var/www/html/bootstrap/cache
 
 # Expose port 80 for the Apache server
 EXPOSE 80
