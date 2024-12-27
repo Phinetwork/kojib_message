@@ -7,7 +7,7 @@ $config->app_version = '3.8.1';
 
 $config->site_url = "http://localhost/grupo/";
 $config->force_url = false;
-$config->force_https = false;
+$config->force_https = true;
 $config->developer_mode = false;
 $config->csrf_token = false;
 $config->samesite_cookies = 'default';
